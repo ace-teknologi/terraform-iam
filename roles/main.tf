@@ -65,6 +65,7 @@ data "aws_iam_policy_document" "human_assume" {
 resource "aws_iam_role" "devops" {
   name               = var.devops_name
   assume_role_policy = data.aws_iam_policy_document.human_assume.json
+  tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "devops" {
@@ -217,6 +218,7 @@ data "aws_iam_policy_document" "devops" {
 resource "aws_iam_role" "readonly" {
   name               = var.readonly_name
   assume_role_policy = data.aws_iam_policy_document.human_assume.json
+  tags               = local.tags
 }
 
 resource "aws_iam_policy_attachment" "readonly" {
@@ -232,6 +234,7 @@ resource "aws_iam_policy_attachment" "readonly" {
 resource "aws_iam_role" "superuser" {
   name               = var.superuser_name
   assume_role_policy = data.aws_iam_policy_document.human_assume.json
+  tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "superuser" {
@@ -255,6 +258,7 @@ data "aws_iam_policy_document" "superuser" {
 resource "aws_iam_role" "support" {
   name               = var.support_name
   assume_role_policy = data.aws_iam_policy_document.human_assume.json
+  tags               = local.tags
 }
 
 resource "aws_iam_policy_attachment" "support" {
@@ -284,6 +288,7 @@ data "aws_iam_policy_document" "machine_assume" {
 resource "aws_iam_role" "metrics" {
   name               = var.metrics_name
   assume_role_policy = data.aws_iam_policy_document.machine_assume.json
+  tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "metrics" {
@@ -317,4 +322,3 @@ data "aws_iam_policy_document" "metrics" {
     resources = ["*"]
   }
 }
-
