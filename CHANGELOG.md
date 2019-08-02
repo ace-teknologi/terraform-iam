@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.0.3 (2019-08-02)
+
+*   Self-managed SSH keys supported
+
 ## v0.0.2 (2019-08-01)
 
 *   Tags added!
