@@ -9,21 +9,21 @@ This module generates generic IAM roles as follows.
 
 ## Human roles
 
-* Devops
-* Readonly
-* Superuser
-* Support
+*   `Devops`
+*   `Readonly`
+*   `Superuser`
+*   `Support`
 
 ## Machine roles
 
-* Metrics
+*   `Metrics`
 
 ## Miscellany
 
 Since this module is recommended to be applied across all accounts, it comes
 with some other goodies:-
 
-* Password defaults
+*   Password defaults
 
 ## Usage
 

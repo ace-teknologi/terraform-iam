@@ -22,4 +22,3 @@ variable "tags" {
 
 variable "username" {
 }
-
