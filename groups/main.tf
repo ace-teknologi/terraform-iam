@@ -290,4 +290,24 @@ data "aws_iam_policy_document" "self_management" {
       values   = ["true"]
     }
   }
+
+  statement {
+    sid = "AllowUsersToSelfManageTheirSSHKeys"
+
+    actions = [
+      "iam:DeleteSSHPublicKey",
+      "iam:GetSSHPublicKey",
+      "iam:ListSSHPublicKeys",
+      "iam:UpdateSSHPublicKey",
+      "iam:UploadSSHPublicKey"
+    ]
+
+    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+  }
 }
