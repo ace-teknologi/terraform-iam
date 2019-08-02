@@ -68,9 +68,9 @@ This module generates a single user, and adds them to appropriate groups.
 
 4.  Login to the [console!](https://console.aws.amazon.com/)
 
-    # Enter your account ID
-    # Enter your username
-    # Enter your decrypted password
+    -   Enter your account ID
+    -   Enter your username
+    -   Enter your decrypted password
 
 5.  Navigate to IAM » <Your User> » Security credentials
 
