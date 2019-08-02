@@ -209,9 +209,9 @@ data "aws_iam_policy_document" "self_management" {
 
     actions   = [
       "iam:Generate*",
-"iam:Get*",
-"iam:List*",
-"iam:Simulate*",
+      "iam:Get*",
+      "iam:List*",
+      "iam:Simulate*",
     ]
 
     resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
