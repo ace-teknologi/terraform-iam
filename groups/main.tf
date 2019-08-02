@@ -336,14 +336,15 @@ data "aws_iam_policy_document" "self_management" {
 
     not_actions = [
       "iam:CreateVirtualMFADevice",
-      "iam:DeleteVirtualMFADevice",
       "iam:CreateLoginProfile",
+      "iam:DeleteVirtualMFADevice",
       "iam:EnableMFADevice",
+      "sts:GetSessionToken",
       "iam:GetUser",
       "iam:ListMFADevices",
+      "iam:ListUsers",
       "iam:ListVirtualMFADevices",
       "iam:ResyncMFADevice",
-      "sts:GetSessionToken",
     ]
 
     resources = ["*"]
