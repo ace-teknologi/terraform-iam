@@ -192,44 +192,16 @@ resource "aws_iam_group_policy" "self_management" {
 
 data "aws_iam_policy_document" "self_management" {
   statement {
-    sid = "AllowUsersToDeactivateTheirOwnVirtualMFADevice"
+    sid = "AllowViewAccountInfo"
 
-    actions = [
-      "iam:DeactivateMFADevice",
+    actions   = [
+      "iam:GetAccountPasswordPolicy",
+      "iam:GetAccountSummary",
+      "iam:ListUsers",
+      "iam:ListVirtualMFADevices",
     ]
 
-    resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
-    ]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
-  }
-
-  statement {
-    sid = "AllowUsersToDeleteTheirOwnVirtualMFADevice"
-
-    actions = [
-      "iam:CreateVirtualMFADevice",
-      "iam:DeleteVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:ResyncMFADevice",
-    ]
-
-    resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
-    ]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
+    resources = ["*"]
   }
 
   statement {
@@ -239,7 +211,6 @@ data "aws_iam_policy_document" "self_management" {
       "iam:CreateVirtualMFADevice",
       "iam:EnableMFADevice",
       "iam:ListMFADevices",
-      "iam:ListUsers",
       "iam:ListVirtualMFADevices",
       "iam:ResyncMFADevice",
     ]
@@ -250,49 +221,102 @@ data "aws_iam_policy_document" "self_management" {
   }
 
   statement {
-    actions = ["iam:ChangePassword"]
+    sid = "AllowManageOwnPasswords"
+
+    actions = [
+      "iam:ChangePassword",
+      "iam:GetUser",
+      "iam:CreateLoginProfile",
+      "iam:DeleteLoginProfile",
+      "iam:GetLoginProfile",
+      "iam:UpdateLoginProfile",
+    ]
 
     resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-  }
-
-  statement {
-    actions   = ["iam:GetAccountPasswordPolicy"]
-    resources = ["*"]
-  }
-
-  statement {
-    actions = ["iam:GetLoginProfile"]
-
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
   }
 
   statement {
     actions = [
-      "iam:DeleteAccessKey",
-      "iam:GetAccessKeyLastUsed",
-      "iam:UpdateAccessKey",
-      "iam:GetUser",
-      "iam:CreateAccessKey",
-      "iam:ListAccessKeys",
+      "iam:GetLoginProfile"
     ]
 
     resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
   }
 
   statement {
-    sid = "AllowUsersToSelfManageTheirSSHKeys"
+    sid = "AllowCreateAndDeleteOwnVirtualMFADevice"
+
+    actions = [
+      "iam:CreateVirtualMFADevice",
+      "iam:DeleteVirtualMFADevice",
+    ]
+
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
+    ]
+  }
+
+  statement {
+    sid = "AllowUsersToManageTheirOwnVirtualMFADevice"
+
+    actions = [
+      "iam:DeactivateMFADevice",
+      "iam:EnableMFADevice",
+      "iam:ListMFADevices",
+      "iam:ResyncMFADevice",
+    ]
+
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
+    ]
+  }
+
+
+  statement {
+    sid = "AllowManageOwnAccessKeys"
+
+    actions = [
+      "iam:CreateAccessKey",
+      "iam:DeleteAccessKey",
+      "iam:ListAccessKeys",
+      "iam:UpdateAccessKey",
+      "iam:GetAccessKeyLastUsed",
+    ]
+
+    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
+  }
+
+  statement {
+    sid = "AllowManageOwnGitCredentials"
+
+    actions = [
+      "iam:CreateServiceSpecificCredential",
+      "iam:DeleteServiceSpecificCredential",
+      "iam:ListServiceSpecificCredentials",
+      "iam:ResetServiceSpecificCredential",
+      "iam:UpdateServiceSpecificCredential",
+    ]
+
+    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
+  }
+
+  statement {
+    sid = "AllowManageOwnSigningCertificates"
+
+    actions = [
+      "iam:DeleteSigningCertificate",
+      "iam:ListSigningCertificates",
+      "iam:UpdateSigningCertificate",
+      "iam:UploadSigningCertificate"
+    ]
+
+    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
+  }
+
+  statement {
+    sid = "AllowManageOwnSSHPublicKeys"
 
     actions = [
       "iam:DeleteSSHPublicKey",
@@ -303,11 +327,31 @@ data "aws_iam_policy_document" "self_management" {
     ]
 
     resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
+  }
+
+  statement {
+    sid = "DenyAllExceptListedIfNoMFA"
+
+    effect = "Deny"
+
+    not_actions = [
+      "iam:CreateVirtualMFADevice",
+      "iam:DeleteVirtualMFADevice",
+      "iam:CreateLoginProfile",
+      "iam:EnableMFADevice",
+      "iam:GetUser",
+      "iam:ListMFADevices",
+      "iam:ListVirtualMFADevices",
+      "iam:ResyncMFADevice",
+      "sts:GetSessionToken",
+    ]
+
+    resources = ["*"]
 
     condition {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
+      values   = ["false"]
     }
   }
 }

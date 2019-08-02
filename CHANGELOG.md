@@ -3,6 +3,8 @@
 ## v0.0.4 (2019-08-02)
 
 *   Use of `lookup` instead of `coalesce` for taggings.
+*   Follow AWS approach for IAM user policies
+    (ref: <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_my-sec-creds-self-manage.html>)
 
 ## v0.0.3 (2019-08-02)
 
