@@ -28,6 +28,6 @@ with some other goodies:-
 ## Usage
 
 This section of the documentation is not currently available (see
-https://github.com/segmentio/terraform-docs/issues/62)
+<https://github.com/segmentio/terraform-docs/issues/62>)
 README
 # terraform-docs --sort-inputs-by-required md . >> README.md

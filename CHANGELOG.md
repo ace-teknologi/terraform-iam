@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## v0.0.4 (2019-08-02)
+
+*   Use of `lookup` instead of `coalesce` for taggings.
+
 ## v0.0.3 (2019-08-02)
 
-*   Self-managed SSH keys supported
+*   Self-managed SSH keys supported.
 
 ## v0.0.2 (2019-08-01)
 

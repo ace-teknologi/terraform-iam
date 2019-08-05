@@ -1,7 +1,7 @@
 locals {
   tf_module      = "user"
   tf_module_repo = "github.com/aceteknologi/terraform-iam"
-  tf_root_path   = coalesce(var.tags["tf_path"], "unknown")
+  tf_root_path   = lookup(var.tags, "tf_path", "unknown")
 }
 
 locals {
