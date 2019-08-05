@@ -7,15 +7,15 @@ cat << README > README.md
 
 This module generates generic IAM roles as follows.
 
-*   `Devops`
-*   `DevopsProd`
-*   `ReadOnly`
-*   `ReadOnlyProd`
-*   `Superuser`
-*   `SuperuserProd`
-*   `Support`
-*   `SupportProd`
-*   `UserSelfManagement`
+*   \`Devops\`
+*   \`DevopsProd\`
+*   \`ReadOnly\`
+*   \`ReadOnlyProd\`
+*   \`Superuser\`
+*   \`SuperuserProd\`
+*   \`Support\`
+*   \`SupportProd\`
+*   \`UserSelfManagement\`
 
 ## Usage
 

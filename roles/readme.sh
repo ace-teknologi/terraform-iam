@@ -9,14 +9,14 @@ This module generates generic IAM roles as follows.
 
 ## Human roles
 
-*   `Devops`
-*   `Readonly`
-*   `Superuser`
-*   `Support`
+*   \`Devops\`
+*   \`Readonly\`
+*   \`Superuser\`
+*   \`Support\`
 
 ## Machine roles
 
-*   `Metrics`
+*   \`Metrics\`
 
 ## Miscellany
 

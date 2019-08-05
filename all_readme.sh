@@ -13,8 +13,8 @@ echo "You're running terraform-docs $TD_VERSION"
 function generate_readme {
   echo "Updating $1"
   cd $1
-  terraform0.12 init > /dev/null
-  AWS_REGION=ap-southeast-2 terraform0.12 validate
+  terraform init > /dev/null
+  AWS_REGION=ap-southeast-2 terraform validate
   ./readme.sh
   cd ..
 }
