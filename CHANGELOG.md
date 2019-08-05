@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.0.4 (2019-08-02)
+## v0.0.4 (2019-08-05)
 
 *   Use of `lookup` instead of `coalesce` for taggings.
 *   Follow AWS approach for IAM user policies
