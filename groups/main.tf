@@ -192,7 +192,7 @@ resource "aws_iam_group_policy" "self_management" {
 
 data "aws_iam_policy_document" "self_management" {
   statement {
-    sid = "AllowViewAccountInfoOfAllUsers"
+    sid = "AllowGlobalIAMPermissions"
 
     actions   = [
       "iam:GetAccountPasswordPolicy",
@@ -205,141 +205,41 @@ data "aws_iam_policy_document" "self_management" {
   }
 
   statement {
-    sid = "AllowViewAccountInfoOfSelf"
+    sid = "AllowPersonalIAMPermissions"
 
     actions   = [
+      "iam:ChangePassword",
+      "iam:CreateAccessKey",
+      "iam:CreateLoginProfile",
+      "iam:CreateServiceSpecificCredential",
+      "iam:CreateVirtualMFADevice",
+      "iam:DeactivateMFADevice",
+      "iam:DeleteAccessKey",
+      "iam:DeleteLoginProfile",
+      "iam:DeleteServiceSpecificCredential",
+      "iam:DeleteSigningCertificate",
+      "iam:DeleteSSHPublicKey",
+      "iam:DeleteVirtualMFADevice",
+      "iam:EnableMFADevice",
       "iam:Generate*",
       "iam:Get*",
       "iam:List*",
-      "iam:Simulate*",
-    ]
-
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-  }
-
-  statement {
-    sid = "AllowUsersToListMFADevicesandUsersForConsole"
-
-    actions = [
-      "iam:CreateVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:ListMFADevices",
-      "iam:ListVirtualMFADevices",
-      "iam:ResyncMFADevice",
-    ]
-
-    resources = [
-      "*",
-    ]
-  }
-
-  statement {
-    sid = "AllowManageOwnPasswords"
-
-    actions = [
-      "iam:ChangePassword",
-      "iam:GetUser",
-      "iam:CreateLoginProfile",
-      "iam:DeleteLoginProfile",
-      "iam:GetLoginProfile",
-      "iam:UpdateLoginProfile",
-    ]
-
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-  }
-
-  statement {
-    actions = [
-      "iam:GetLoginProfile"
-    ]
-
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-  }
-
-  statement {
-    sid = "AllowCreateAndDeleteOwnVirtualMFADevice"
-
-    actions = [
-      "iam:CreateVirtualMFADevice",
-      "iam:DeleteVirtualMFADevice",
-    ]
-
-    resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
-    ]
-  }
-
-  statement {
-    sid = "AllowUsersToManageTheirOwnVirtualMFADevice"
-
-    actions = [
-      "iam:DeactivateMFADevice",
-      "iam:EnableMFADevice",
-      "iam:ListMFADevices",
-      "iam:ResyncMFADevice",
-    ]
-
-    resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
-    ]
-  }
-
-
-  statement {
-    sid = "AllowManageOwnAccessKeys"
-
-    actions = [
-      "iam:CreateAccessKey",
-      "iam:DeleteAccessKey",
-      "iam:ListAccessKeys",
-      "iam:UpdateAccessKey",
-      "iam:GetAccessKeyLastUsed",
-    ]
-
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-  }
-
-  statement {
-    sid = "AllowManageOwnGitCredentials"
-
-    actions = [
-      "iam:CreateServiceSpecificCredential",
-      "iam:DeleteServiceSpecificCredential",
-      "iam:ListServiceSpecificCredentials",
       "iam:ResetServiceSpecificCredential",
+      "iam:ResyncMFADevice",
+      "iam:Simulate*",
+      "iam:UpdateAccessKey",
+      "iam:UpdateLoginProfile",
       "iam:UpdateServiceSpecificCredential",
-    ]
-
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-  }
-
-  statement {
-    sid = "AllowManageOwnSigningCertificates"
-
-    actions = [
-      "iam:DeleteSigningCertificate",
-      "iam:ListSigningCertificates",
       "iam:UpdateSigningCertificate",
-      "iam:UploadSigningCertificate"
-    ]
-
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
-  }
-
-  statement {
-    sid = "AllowManageOwnSSHPublicKeys"
-
-    actions = [
-      "iam:DeleteSSHPublicKey",
-      "iam:GetSSHPublicKey",
-      "iam:ListSSHPublicKeys",
       "iam:UpdateSSHPublicKey",
-      "iam:UploadSSHPublicKey"
+      "iam:UploadSigningCertificate",
+      "iam:UploadSSHPublicKey",
     ]
 
-    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"]
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
+    ]
   }
 
   statement {
