@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.1.1 (UNRELEASED)
+
+*   Resolves incorrect repo path in taggings.tf
+    (Ref: <https://github.com/ace-teknologi/terraform-iam/issues/12>)
+
 ## v0.1.0 (2019-08-05)
 
 *   Use of `lookup` instead of `coalesce` for taggings.

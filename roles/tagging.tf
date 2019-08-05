@@ -1,6 +1,6 @@
 locals {
   tf_module      = "roles"
-  tf_module_repo = "github.com/aceteknologi/terraform-iam"
+  tf_module_repo = "github.com/ace-teknologi/terraform-iam"
   tf_root_path   = lookup(var.tags, "tf_path", "unknown")
 }
 
