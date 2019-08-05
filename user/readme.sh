@@ -23,7 +23,7 @@ This module generates a single user, and adds them to appropriate groups.
 
     \`\`\`hcl2
     module "stuart" {
-      source = "git@github.com:aceteknologi/terraform-iam.git//user?ref=v0.1.0"
+      source = "git@github.com:ace-teknologi/terraform-iam.git//user?ref=v0.1.0"
 
       username = "stuart@aceteknologi.com"
 
