@@ -2,8 +2,8 @@ data aws_caller_identity "current" {}
 
 locals {
   authorised_account_ids = (length(var.authorised_account_ids) == 0 ?
-    var.authorised_account_ids :
-    [data.aws_caller_identity.current.account_id])
+    [data.aws_caller_identity.current.account_id] :
+    var.authorised_account_ids)
   authorised_account_root_arns = formatlist("arn:aws:iam::%s:root", local.authorised_account_ids)
 }
 
