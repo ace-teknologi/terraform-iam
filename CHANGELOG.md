@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.1.2 (2019-08-09)
+
+*   Resolves inability to assume roles across accounts.
+    (Ref: <https://github.com/ace-teknologi/terraform-iam/issues/17>)
+
 ## v0.1.1 (2019-08-08)
 
 *   Resolves incorrect repo path in taggings.tf.
