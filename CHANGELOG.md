@@ -1,9 +1,11 @@
 # CHANGELOG
 
-## v0.1.1 (UNRELEASED)
+## v0.1.1 (2019-08-08)
 
-*   Resolves incorrect repo path in taggings.tf
+*   Resolves incorrect repo path in taggings.tf.
     (Ref: <https://github.com/ace-teknologi/terraform-iam/issues/12>)
+*   Resolves inability to change password without an MFA device activated.
+    (Ref: <https://github.com/ace-teknologi/terraform-iam/issues/14>)
 
 ## v0.1.0 (2019-08-05)
 

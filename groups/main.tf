@@ -248,16 +248,18 @@ data "aws_iam_policy_document" "self_management" {
     effect = "Deny"
 
     not_actions = [
+      "iam:ChangePassword",
       "iam:CreateVirtualMFADevice",
       "iam:CreateLoginProfile",
       "iam:DeleteVirtualMFADevice",
       "iam:EnableMFADevice",
-      "sts:GetSessionToken",
+      "iam:GetAccountPasswordPolicy",
       "iam:GetUser",
       "iam:ListMFADevices",
       "iam:ListUsers",
       "iam:ListVirtualMFADevices",
       "iam:ResyncMFADevice",
+      "sts:GetSessionToken",
     ]
 
     resources = ["*"]
