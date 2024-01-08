@@ -254,11 +254,13 @@ data "aws_iam_policy_document" "self_management" {
       "iam:DeleteVirtualMFADevice",
       "iam:EnableMFADevice",
       "iam:GetAccountPasswordPolicy",
+      "iam:GetLoginProfile",
       "iam:GetUser",
       "iam:ListMFADevices",
       "iam:ListUsers",
       "iam:ListVirtualMFADevices",
       "iam:ResyncMFADevice",
+      "iam:UpdateLoginProfile",
       "sts:GetSessionToken",
     ]
 

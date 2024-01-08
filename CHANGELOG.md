@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.3 (2024-01-08)
+
+### Fixed
+
+*   Allow user to change password without MFA configured.
+
 ## v0.1.2 (2019-08-09)
 
 *   Resolves inability to assume roles across accounts.
